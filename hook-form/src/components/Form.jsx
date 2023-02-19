@@ -50,26 +50,46 @@ const Form = () => {
             <form action="" className="form col-md-4 mx-auto" onSubmit={ submitHandler }>
                 {/*  First Name  */}
                 <div className="mb-3">
+                    {
+                        //validation
+                        person.firstName && person.firstName.length < 2 ? <p className='text-danger'>First Name must be at least 2 characters long.</p> : null
+                    }
                     <label htmlFor='' className="form-label">First Name:</label>
                     <input type="text" name="firstName" className="form-control" onChange={onChangeHandler} value = {person.firstName} />
                 </div>
                 {/* <!-- Last Name --> */}
                 <div className="mb-3">
+                    {
+                        //validation
+                        person.lastName && person.lastName.length < 2  ? <p className='text-danger'>Last Name must be at least 2 characters long.</p> : null
+                    }
                     <label  htmlFor='' className="form-label">Last Name:</label>
                     <input type="text" name="lastName" className="form-control" onChange={onChangeHandler} value = {person.lastName} />
                 </div>
                 {/* <!-- Email --> */}
                 <div className="mb-3">
+                {
+                        //validation
+                        person.email && person.email.length < 5 ? <p className='text-danger'>Email must be at least 5 characters long.</p> : null
+                    }
                     <label  htmlFor='' className="form-label">Email:</label>
                     <input type="email" name="email" className="form-control" onChange={onChangeHandler} value = {person.email} />
                 </div>
                 {/* <!-- Password --> */}
                 <div className="mb-3">
+                    {
+                        //validation
+                        person.password && person.password.length < 8 ? <p className='text-danger'>Password must be at least 8 characters long.</p> : null
+                    }
                     <label  htmlFor='' clasName="form-label">Password:</label>
                     <input type="password" name="password" className="form-control" onChange={onChangeHandler} value = {person.password} />
                 </div>
                 {/* <!-- Confirm Password --> */}
                 <div className="mb-3">
+                    {
+                        //validation
+                        person.password !== person.confirmPassword  ? <p className='text-danger'>Passwords do not match.</p> : null
+                    }
                     <label  htmlFor='' className="form-label">confirm Password:</label>
                     <input type="password" name="confirmPassword" className="form-control"  onChange={onChangeHandler} value = {person.confirmPassword} />
                 </div>
@@ -86,7 +106,7 @@ const Form = () => {
                                 <div className='carbody'>
                                 <h1 className='card-title'>Name: { person.firstName } { person.lastName }</h1>
                                 <p className='card-text'>Email: {person.email}</p>
-                                <p className='card-text'>Password: {person.password}:</p>
+                                <p className='card-text'>Password: {person.password}</p>
                                 <p className='card-text'>Confirm Password: {person.confirmPassword}</p>
                                 </div>
                             </div>
