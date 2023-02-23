@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// old way
+// ( OLD WAY )
 // user form function
 // const Form = () => {
 //     const [firstName, setFirstName] = useState("");
@@ -22,6 +22,56 @@ const Form = () => {
     // store instances of person objects in array
     const [personList, setPersonList] = useState([])
 
+    // ( VALIDATION )
+    // This validator will prevent the form data from being submitted if there are errors
+    const userValidation = (e) => {
+        let isValid = true
+        if (person.firstName.length === 0){
+            isValid = false
+            console.log("first name must not be blank")
+            return isValid
+        }
+        if (person.firstName.length < 2){
+            isValid = false
+            console.log("first name must be more than 2 characters")
+            return isValid
+        }
+        if (person.lastName.length === 0){
+            isValid = false
+            console.log("last name must not be blank")
+            return isValid
+        }
+        if (person.lastName.length < 2){
+            isValid = false
+            console.log("last name must be more than 2 characters")
+            return isValid
+        }
+        if (person.email.length < 5){
+            isValid = false
+            console.log("email must be more than 2 characters")
+            return isValid
+        }
+        if (person.password.length === 0){
+            isValid = false
+            console.log("password must not be blank")
+            return isValid
+        }
+        if (person.password.length < 8){
+            isValid = false
+            console.log("password must be more than 2 characters")
+            return isValid
+        }
+        if (person.password !== person.confirmPassword){
+            isValid = false
+            console.log("passwords do not match")
+            return isValid
+        }
+        else{
+            console.log("No errors, All data is valid!")
+            return isValid
+        }
+
+    }
     // target and update the user input to the values of the key pairs
     // targets the particular name in our input tags associated with the value
     const onChangeHandler = (e) => {
@@ -32,18 +82,19 @@ const Form = () => {
     const submitHandler = (e) => {
         // prevent the default refresh of the browser to keep our state from being reset
         e.preventDefault();
-        console.log("In submit handler")
-        console.log(`Form: ${JSON.stringify(person)}`)
-        // pulls data from personList and person object attributes are applied to a index
-        setPersonList([...personList, person])
-        // clears form after submit
-        setPerson({
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            confirmPassword: ""
-        })
+        if(userValidation()){
+            console.log(`Form: ${JSON.stringify(person)}`)
+            // pulls data from personList and person object attributes are applied to a index
+            setPersonList([...personList, person])
+            // clears form after submit
+            setPerson({
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
+                confirmPassword: ""
+            })
+        }
     }
     return (
         <div>
@@ -81,7 +132,7 @@ const Form = () => {
                         //validation
                         person.password && person.password.length < 8 ? <p className='text-danger'>Password must be at least 8 characters long.</p> : null
                     }
-                    <label  htmlFor='' clasName="form-label">Password:</label>
+                    <label  htmlFor='' className="form-label">Password:</label>
                     <input type="password" name="password" className="form-control" onChange={onChangeHandler} value = {person.password} />
                 </div>
                 {/* <!-- Confirm Password --> */}
