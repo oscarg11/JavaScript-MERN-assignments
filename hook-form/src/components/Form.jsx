@@ -72,6 +72,8 @@ const Form = () => {
         }
 
     }
+    // Makes a copy of a person object and updates the new input onto the particular
+    // input name that is being targeted (changed )
     // target and update the user input to the values of the key pairs
     // targets the particular name in our input tags associated with the value
     const onChangeHandler = (e) => {
@@ -84,7 +86,7 @@ const Form = () => {
         e.preventDefault();
         if(userValidation()){
             console.log(`Form: ${JSON.stringify(person)}`)
-            // pulls data from personList and person object attributes are applied to a index
+            // Add to user to our person Array and person object attributes are applied to a index
             setPersonList([...personList, person])
             // clears form after submit
             setPerson({
