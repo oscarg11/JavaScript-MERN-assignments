@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 //     const [confirmPassword, setConfirmPassword] = useState("");
 
 // new way to use State ( less code ) to make a person object
-const Form = () => {
+const Form = ({personList, setPersonList}) => {
         // getter, setter  
     const [person, setPerson] = useState({
         firstName: "",
@@ -19,8 +19,6 @@ const Form = () => {
         confirmPassword: ""
     })
 
-    // store instances of person objects in array
-    const [personList, setPersonList] = useState([])
 
     // ( VALIDATION )
     // This validator will prevent the form data from being submitted if there are errors
@@ -149,24 +147,6 @@ const Form = () => {
                 {/* <!-- Register button --> */}
                 <input type="submit" value="Submit"/>
             </form>
-
-            <div className='col-4 offset-4 mt-3'>
-                {
-                    // print form data to screen
-                    //interate through personList(array) and apply the person object attributes to each iteration
-                    personList.map((person, i) =>(
-                            <div className='card' key={i}>
-                                <div className='carbody'>
-                                <h1 className='card-title'>Name: { person.firstName } { person.lastName }</h1>
-                                <p className='card-text'>Email: {person.email}</p>
-                                <p className='card-text'>Password: {person.password}</p>
-                                <p className='card-text'>Confirm Password: {person.confirmPassword}</p>
-                                </div>
-                            </div>
-                        )
-                    )
-                }
-            </div>
         </div>
     )
 }
