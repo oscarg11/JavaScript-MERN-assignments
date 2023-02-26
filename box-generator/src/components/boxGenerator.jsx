@@ -7,13 +7,10 @@ import React, { useState } from "react";
 //     backgroundColor: "box.boxColor"
 // };
 // box object function
-const BoxGen = () => {
+const BoxGen = ({ boxList, setBoxList}) => {
     const [box, setBox] = useState({
         boxColor: ""
     })
-
-    // (box list) array of box objects
-    const [boxList, setBoxList] = useState([])
 
     // targets and updates box attributes based on what key the user changes on the form
     const onChangeHandler = (e) => {
@@ -37,23 +34,6 @@ const BoxGen = () => {
                     <button className="btn btn-primary mt-3">Submit</button>
                 </div>
             </form>
-            {/* dispaly boxes */}
-            <div>
-                {
-                    boxList.map((box, i) => (
-                        <div key={i} style={{
-                            display: "inline-block",
-                            height: "200px",
-                            width: "200px",
-                            margin: "5px",
-                            border: "2px solid black",
-                            backgroundColor: box.boxColor
-                        }}>
-                        </div>
-                        
-                    ))
-                }
-            </div>
         </div>
     )
 }
