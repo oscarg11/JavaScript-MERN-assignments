@@ -1,4 +1,6 @@
 import React,{useState, useEffect} from 'react'
+// install axios
+import axios from 'axios';
 
 const PokemonList = () => {
     // array of pokemon objects
@@ -6,16 +8,11 @@ const PokemonList = () => {
     // this will run immediately after the JSX is rendered
     useEffect(() => {
         console.log("Hello")
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=807')
+        // switched fetch to axios.get()
+        axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
             .then(response => {
-                // this will return the data from the response object
-                //    in a json format
-                return response.json()
-            })
-            .then(response => {
-                // store the json converted data in state so it can be displayed
-                SetPokemon(response.results)
-            })
+                // store the converted data in state so it can be displayed
+                SetPokemon(response.data.results)})
             .catch((err)=>{
                 console.log(err);
             })
