@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Display = ({task, setTask,todoList, setTodoList}) => {
+const Display = ({todoList, setTodoList}) => {
 
   console.log("TODO LIST",todoList)
 
-  // DELETE A TASK - filters out the task id that matches the selected input
+  //( DELETE A TASK) - filters out the task id that matches the selected input
   // and keeps the rest of the task items in a new array
   const deleteTask = (deletedTaskByID) => {
     console.log(deletedTaskByID)
@@ -13,20 +13,19 @@ const Display = ({task, setTask,todoList, setTodoList}) => {
     setTodoList(filteredTasks)
   }
 
-  // (CHECK OFF TASK FUNCTIONALITY) - only the selcted index of our task list is set to true(checked off)
+  // ( CHECK OFF TASK FUNCTIONALITY ) - only the selcted index of our task list is set to true(checked off)
   const handleCheckBox = (checkedIdx) => { 
     const newTaskList = todoList.map((oneTask, i) => {
       // if true the task's completed property is reversed and set to true
       if (checkedIdx === i){
         oneTask.completed = !oneTask.completed
-        // const newTaskList = {...oneTask, completed: ! oneTask.completed}
       }
-      // return newTaskList;
       return oneTask //returns all unchanged task objects
     })
     setTodoList(newTaskList)
   }
 
+  // (DISPLAY TASKS)
   return (
     <div>
     {
