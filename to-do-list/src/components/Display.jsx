@@ -12,14 +12,36 @@ const Display = ({task, setTask,todoList, setTodoList}) => {
     console.log("NEW LIST ===>", filteredTasks)
     setTodoList(filteredTasks)
   }
+
+  // (CHECK OFF TASK FUNCTIONALITY) - only the selcted index of our task list is set to true(checked off)
+  const handleCheckBox = (checkedIdx) => { 
+    const newTaskList = todoList.map((oneTask, i) => {
+      // if true the task's completed property is reversed and set to true
+      if (checkedIdx === i){
+        oneTask.completed = !oneTask.completed
+        // const newTaskList = {...oneTask, completed: ! oneTask.completed}
+      }
+      // return newTaskList;
+      return oneTask //returns all unchanged task objects
+    })
+    setTodoList(newTaskList)
+  }
+
   return (
     <div>
     {
-      todoList.map((oneTask, i) => (
+    todoList.map((oneTask, i) => (
         <div key={i}>
-          <p>{ oneTask.taskName}</p>
+          <h1 style={ //if task is completed line-through style is applied
+            oneTask.completed?
+            {textDecorationLine: 'line-through',display:"inline-block", marginRight: "10px"}
+            :{display:"inline-block", marginRight: "10px" } //if false (not checked)
+          }>
+            { oneTask.taskName}
+          </h1>
+            <input style={{marginRight: "10px"}} checked={oneTask.completed} type="checkbox" onChange={(e) => handleCheckBox(i)}/>
           {/* delete task */}
-          <button className="btn btn-danger mt-3" onClick={(e) => deleteTask(oneTask.id)}>Delete</button>
+            <button style={{marginBottom: "20px"}}className="btn btn-danger mt-3" onClick={(e) => deleteTask(oneTask.id)}>Delete</button>
         </div>
 
         )
