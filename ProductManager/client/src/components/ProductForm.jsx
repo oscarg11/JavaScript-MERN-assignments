@@ -28,22 +28,22 @@ const ProductForm = () => {
         }
         return isValid
     }
-
+    // once form is submitted a new product object is created in our db
     const submitProductHandler = (e) => {
         e.preventDefault()
         if (formValidation()){//check validation first
              //makes a post request using axios to create a new product
-            axios.post('http://localhost:8000/api/products', product)
+            axios.post('http://localhost:8000/api/products/create', product)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
              // clears form after submit
             setProduct({title:"", price:"",description:""})
         }
-
     }
   return (
     //create product formS
     <div>
+        <h1>Product Manager Form</h1>
         <form action="" className="form col-md-4 mx-auto" onSubmit={ submitProductHandler }>
                 {/*  title  */}
                 <div className="mb-3">
@@ -63,7 +63,7 @@ const ProductForm = () => {
                 <div className="mb-3">
                     {
                         //validation
-                        product.description && product.description.length < 2 ? <p className='text-danger'>Description must be at least 2 characters long.</p> : null
+                        product.description && product.description.length < 3 ? <p className='text-danger'>Description must be at least 3 characters long.</p> : null
                     }
                     <label  htmlFor='description' className="form-label">Description:</label>
                     <input type="text" name="description" className="form-control" onChange={ onChangeHandler } />
