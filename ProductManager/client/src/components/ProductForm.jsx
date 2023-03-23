@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ProductForm = () => {
     //product object
@@ -9,7 +10,16 @@ const ProductForm = () => {
         description: ''
     })
 
-     //refresh state with changes
+    //useNavigate
+    const navigate = useNavigate()
+
+    //go back to dashkboard
+    const goBackToDashboard = () => {
+        navigate("/api/products")
+    }
+    
+
+     //(onChange)refreshes state with most recent changes
     const onChangeHandler = (e) => {
         setProduct({...product,[e.target.name]: e.target.value})
     }
@@ -32,12 +42,12 @@ const ProductForm = () => {
     const submitProductHandler = (e) => {
         e.preventDefault()
         if (formValidation()){//check validation first
+            console.log("NEW PRODUCT ADDED VVV")
              //makes a post request using axios to create a new product
             axios.post('http://localhost:8000/api/products/create', product)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
-             // clears form after submit
-            setProduct({title:"", price:"",description:""})
+            navigate("/api/products")
         }
     }
   return (
@@ -71,6 +81,8 @@ const ProductForm = () => {
                 {/* <!-- Submit button --> */}
                 <input type="submit" value="Submit"/>
             </form>
+            {/* Navigate back to the dashboard */}
+            <button className='btn btn-success mt-2' onClick={ goBackToDashboard }>Go Back</button>
     </div>
   )
 }

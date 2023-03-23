@@ -6,14 +6,15 @@ import { useEffect } from 'react';
 import ProductForm from './components/ProductForm';
 import ProductList from './components/ProductList';
 import OneProduct from './components/OneProduct';
+import EditProduct from './components/EditProduct';
 
 function App() {
 
-  useEffect(() => {
-  axios.get("http://localhost:8000/api/products")
-  .then(res => console.log(res.data) )
-  .catch(err => console.log(err))
-}, [])
+//   useEffect(() => {
+//   axios.get("http://localhost:8000/api/products")
+//   .then(res => console.log(res.data) )
+//   .catch(err => console.log(err))
+// }, [])
 
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
           < Route element={<ProductForm/>} path="api/products/create"/>
           < Route element={<ProductList/>} path="api/products"/>
           < Route element={<OneProduct/>} path="api/products/:id"/>
+          < Route element={<EditProduct/>} path="api/products/edit/:id"/>
         </Routes>
       </BrowserRouter>
     
